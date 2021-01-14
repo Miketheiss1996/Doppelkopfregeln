@@ -1,0 +1,204 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{amssymb,amsmath,amsfonts}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{dsfont}
+\usepackage{tikz}
+\usepackage{lmodern}
+\usepackage{hyperref}
+\usepackage{fdsymbol}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\DeclareSymbolFont{extraup}{U}{zavm}{m}{n}
+\DeclareMathSymbol{\varheart}{\mathalpha}{extraup}{86}
+\DeclareMathSymbol{\vardiamond}{\mathalpha}{extraup}{87}
+\pgfplotsset{compat=1.9}
+\usetikzlibrary{patterns}
+
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows}
+
+\pagestyle{plain}
+\textwidth16cm \textheight23cm
+\oddsidemargin0mm \evensidemargin-4.5mm \topmargin-10mm
+\renewcommand{\baselinestretch}{1.2}
+\parindent0pt\parskip1.5ex \sloppy
+
+\newcommand{\N}{\ensuremath{\mathds{N}}} % natural numbers
+\newcommand{\Z}{\ensuremath{\mathds{Z}}} % integers
+\newcommand{\Q}{\ensuremath{\mathds{Q}}} % rational numbers
+\newcommand{\R}{\ensuremath{\mathds{R}}} % real numbers
+\newcommand{\C}{\ensuremath{\mathds{C}}} % complex numbers
+\newcommand{\K}{\ensuremath{\mathds{K}}} % field (real or complex numbers)
+\newcommand{\lev}{\text{lev}} 
+\newcommand{\Prb}{\ensuremath{\mathds{P}}} % probability
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\nz}{\\[0.5em]}
+\newcommand{\eps}{{\tt eps}}%= Maschinengenauigkeit
+
+\newcommand{\T}{^{\sf T}}
+\def\eins{\mbox{1\hskip-0.24em l}}
+\tikzset{
+  schraffiert/.style={pattern=horizontal lines,pattern color=#1},
+  schraffiert/.default=black
+}
+
+
+
+\newcommand{\Lsg}[2]{\stepcounter{loesung}\par\bigskip\noindent
+ {\bf L\"osung \arabic{loesung}\quad}\marginpar{(#1)}}
+ 
+\newcounter{teilaufg}
+\renewcommand{\theteilaufg}{\roman{teilaufg}}
+
+\newenvironment{teilaufg}{%
+\begin{list}{(\theteilaufg)}{\usecounter{teilaufg}}}%\setlength{\leftmargin}{\labelsep}}}%
+{\end{list}}
+
+\begin{document}
+\newcounter{loesung} %Nr. der letzten Aufgabe:
+\setcounter{loesung}{23}
+
+%\begin{center}
+\title{Doppelkopfregeln}
+\author{Sebastian Bruhm, Larissa Lingens , Charlotte Mollnau, Franz Oehler und Mike Theiß}
+%\end{center}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+
+\section{Doppelkopfblatt}
+Das Blatt besteht aus 48 Karten, von jeder der 4 Farben (Kreuz, Pik, Herz Karo) sind 12 Karten im Spiel. Jede der Spielkarten (9, 10, Bube, Dame, König, Ass) ist doppelt vorhanden. 
+%\section{Spielvorbereitung}
+%Das Kartenspiel wird ohne Talon (Ziehstapel) gespielt. Der Geber mischt die Karten, lässt abheben und verteilt an jeden Spieler verdeckt 12 Karten.
+%Gewöhnlich spielt man Doppelkopf mit einem Partner. Welcher das ist, ergibt sich daraus, welche der Spieler die beiden Kreuz-Damen auf der Hand halten, denn diese beiden bilden ein Spielpaar, die anderen beiden Spieler das andere. Allerdings weiß man das zu Beginn nicht, denn das Kartenblatt jedes einzelnen Spielers ist ja geheim. Zudem ändert sich die Partnerschaft in jeder Spielrunde.
+\section{Augenzahl der Karten}
+Die einzelnen Spielkarten werden folgendermaßen gewertet:
+\begin{itemize}
+\item
+    Ass = 11 Augen
+\item
+    König = 4 Augen
+\item
+    Dame = 3 Augen
+\item
+    Bube = 2 Augen
+\item
+    Zehn = 10 Augen
+\item
+    Neun = 0 Augen
+\end{itemize}
+Dementsprechend liegt die Zehn in der Rangliste direkt hinter dem Ass. Erst dann folgen der König, die Dame und der Bube. Man sticht immer mit der ranghöheren Karte der angesagten Farbe oder mit einem Trumpf.
+Es besteht Farbzwang. Trumpfen darf man nur dann, wenn man nicht Farbe bekennen kann.
+
+\section{Trumpf beim Doppelkopf}
+Entgegen vieler anderer Kartenspiele, ist es mit dem Trumpf beim Doppelkopf eine besondere Sache. Es gibt hier wesentlich mehr Trümpfe, denn die Hälfte der Spielkarten sind Trumpf-Karten. Dafür gilt folgende Rangliste:
+\begin{enumerate}
+\item $\varheart 10$\text{ (\glqq Dulle\grqq)}
+\item $\clubsuit D$\text{ (\glqq Die Alten\grqq)}
+\item $\spadesuit D$
+\item $\varheart D$\text{ (\glqq Athene\grqq)}
+\item $\vardiamond D$\text{ (\glqq Chantall\grqq)}
+\item $\clubsuit B$\text{ (\glqq Charly\grqq)}
+\item $\spadesuit B$\text{ (\glqq Bergbauer\grqq)}
+\item $\varheart B$
+\item $\vardiamond B$ 
+\item $\vardiamond Ass$\text{ (\glqq Fuchs\grqq)}
+\item $\vardiamond 10$
+\item $\vardiamond K$
+\item $\vardiamond 9$
+\end{enumerate}
+
+\section{Normaler Spielablauf}
+Wenn sich die Partner mit den beiden “Alten” schnell finden, ist es möglich, dass sie sich gegenseitig zuspielen. Beim sogenannten “ehrlichen Spiel” spielt ein Besitzer der Kreuz Dame eine Karo Zehn oder Karo Ass aus und der Partner sticht mit einer Karte, mit der er den Stich ganz sicher für sich entscheidet. Dafür muss nicht zwangsläufig die “Alte” ausgespielt werden. Jetzt kann sich das Team gegenseitig hohe Karten zuspielen, um schnellstmöglich die Punktzahl von mindestens 121 zu erreichen.
+
+\section{Spielanleitung}
+\begin{description}
+\item{Vorbehalte:}  Bevor die erste Karte ausgespielt wird, kann jeder (beginnend mit dem Spieler links vom Geber) einen Vorbehalt ansagen (oder auch nicht, dann ist er "gesund").
+Vorrang hat stets der höherwertige Vorbehalt. Die Vorbehalte sind absteigend nach Wertigkeit im Abschnitt \ref{Vorbehalte} erklärt.
+\item{Ansagen:} {\bf Re} wird von Spielern die eine Kreuz Dame, und {\bf Kontra} von denen die keine Kreuz Dame in ihrem Blatt halten, angesagt. Re und Kontra verdoppeln beide die Spielpunkte. Diese Ansagen dürfen getätigt werden, solange die 6. Karte (= die 2. Karte des 2. Stichs) noch nicht offen auf dem Tisch liegt. 
+\item{Absagen:} Nur dann, wenn Re oder Kontra angesagt wurde, sind weitere \glqq Ansagen\grqq\;möglich, die allerdings Absagen genannt werden:
+Keine 90 — vor der 10. Karte, aber höchstens einen Stich nach der Ansage
+Keine 60 — vor der 14. Karte, aber höchstens einen Stich nach der Absage keine 90
+Keine 30 — vor der 18. Karte, aber höchstens einen Stich nach der Absage keine 60
+Keine 0 (Schwarz) — vor der 22. Karte, aber höchstens einen Stich nach der Absage keine 30
+Im Falle einer Hochzeit, dient der Klärungsstich als erster Stich, die weiteren Ansagen (Keine 90, 60 ...) folgen dann entsprechend.
+\item{Pflicht An- und Absagen:} Liegen im ersten Farbstich 30 oder mehr Punkte Punkte, so muss derjenige der den Stich macht entsprechend seiner Partei Re oder Kontra ansagen. Kommen direkt im Anschluß weitere Stiche mit über 30 Punkten müssen die jeweiligen Parteien immer eine Stufe mehr Absagen.
+Ausgenommen von dieser Regel sind Soli und Hammelrennen.
+\end{description}
+\section{Wie spielt man Doppelkopf}
+\begin{itemize}
+\item Als Fehlfarben gelten die Karten, die kein Trumpf sind: im Wesentlichen sind das die Farben Kreuz, Pik und Herz (bis auf die Herz 10). Im normalen Spiel sind alle Karos Trumpf.
+\item Ob nun Fehlfarbe oder Trumpf angespielt (= erste Karte eines Stichs) wurde, es muss grundsätzlich bedient werden. Nur wenn dies auf Grund des Blatts nicht möglich ist, kann abgeworfen (eine andere Fehlfarbe) oder gestochen werden (ein Trumpf).
+Bei zwei gleichen Karten innerhalb eines Stichs, hat immer die zuerst gespielte Karte den höheren Rang ("liegt oben").
+\item Bis auf die Solos und das Hammelrennen, ist Doppelkopf ein Spiel zwei gegen zwei. Die Partner werden in jeder Runde erneut durch die zufällige Verteilung der Karten festgelegt:
+die beiden Spieler mit einer Kreuz Dame (Re-Partei) spielen zusammen gegen die Contra-Partei. Zunächst kennt kein Spieler seinen Partner (Ausnahme Re/Kontra oder Solo angesagt). Dies ändert sich erst im Verlauf des Spieles.
+\item Der Geber mischt die Karten, lässt abheben (mind. 3 Karten), und verteilt im Uhrzeigersinn 3 mal 4 Karten beginnend bei dem Spieler zu seiner linken. Jeder Spieler besitzt nun genau 12 Karten. 
+\item Der Spieler an der linken Seite des Gebers beginnt das Spiel (außer bei Solo, der immer selbst "raus kommt" weshalb auch der Geber des Solos noch einmal gibt). Nach diesem Start, spielt jeweils der Spieler an ("ist vorne"), der den vorherigen Stich gewonnen hat.
+\end{itemize}
+\section{Vorbehalte}\label{Vorbehalte}
+\subsection{Hammelrennen}\label{Hammelrennen}
+Ein Hammelrennen wird immer dann gespielt, wenn im vorherigen Spiel beide Parteien 120 Punkte erreicht haben. Beim Hammelrennen spielt jeder für sich selbst. Ziel ist es möglichst nah an 60 Punkte zu kommen. Am Ende bekommt jeder Spieler die Differenz von 60 und seinen erreichten Punkten geteilt durch 10 als Minuspunkte aufgeschrieben. Sei $x$ die erreichte Punktzahl, errechnen sich die Minuspunkte wie folgt:
+\[\left\lceil\frac{\lvert 60-x\lvert}{10} \right\rceil.\]
+Nur der Spieler der als nächstes an die 60 kommt, bekommt die Minuspunkte der anderen als Pluspunkte aufgeschrieben. Sollte mehrere Spieler gleich dicht an der 60-Punkte Marke liegen teilen Sie sich die Minuspunkte der anderen Spieler als Pluspunkte. Sollten alle vier Spieler 60 Punkte erreichen wird erneut eine Runde Hammelrennen gespielt.
+Ein Hammelrenen wird außerhalb der Reihenfolge von denjenigen gespielt, die es verursacht haben. Es wird also quasi das vorherige Spiel wiederholt.
+\subsection{Solo}
+Ein Solospieler kommt im ersten Stich raus. Anschließend wird das Spiel wiederholt, damit nicht ein Spieler beim Rauskommen übersprungen wird.
+\begin{description}
+\item{Köhlersolo:} Alle Bilder sind Trumpf, wobei die Könige am höchsten sind. Anschließend kommen die Damen und zum Schluß die Buben. (Innerhalb eines Bildes bleibt die bestehende Reihenfolge Kreuz, Pik, Herz, Karo.) Die Fehlfarben haben die Reihenfolge As, Zehn, Neun.
+\item{Damensolo:} Nur die 8 Damen sind Trumpf. Die Fehlfarben haben die Reihenfolge As, Zehn, König, Bube, Neun.
+\item{Bubensolo:} Nur die 8 Buben sind Trumpf. Die Fehlfarben haben die Reihenfolge As, Zehn, König, Dame, Neun.
+\item{Trumpfsolo:} Jede der 4 Farben kann als Trumpf Solo angesagt werden. Beim Karo Solo bleibt alles beim Alten (äquivalent zum Normalspiel); bei den anderen 3 Farben werden die 4 Karo Trümpfe (As, Zehn, König, Neun) durch die gewählte Farbe ausgetauscht. Dies hat zur Konsequenz, dass beim Herz Solo zwei Trümpfe weniger im Spiel sind.
+\item{Fleischloser:} Es gibt keinen Trumpf. Die Fehlfarben haben die Reihenfolge As, Zehn, König, Dame, Bube, Neun.
+\end{description} 
+\subsection{Schmeißen}
+Bei 5 Neunen oder mehr, darf derjenige Spieler schmeißen und das Spiel wird wiederholt
+\subsection{Armut}Nur 3 Trümpfe (oder weniger): Die Trümpfe werden verdeckt gegen den Uhrzeigersinn herumgegeben. Derjenige, der sie aufnimmt spielt mit demjenigen der die Armut hatte. Er darf die 3 Karten mit beliebigen Karten auf seiner Hand tauschen und gibt sie anschließend wieder dem Spieler mit der Armut zurück. Das Team mit der Armut ist die Re-Partei.
+\subsection{Ramsch}\label{Ramsch}
+Sollte ein Armut keinen Partner bekommen, wird ein Spiel geramscht. Hierbei ergeben sich die Teams erst am Ende des Spiels. Es spielen die zwei Spieler mit den meisten und die zwei Spieler mit den wenigsten Augen zusammen. Das Team mit mehr Augen bekommt ihre Punkte minus 120 und geteilt  durch 10 als Minuspunkte aufgeschrieben, das Team mit weniger Augen mit bekommt die gleiche Zahl als Pluspunkte aufgeschrieben. Sei $x$ die Augen von dem Team mit mehr Augen, dann ergibt sich die Wertigkeit des Spiels auch durch folgende Formel:
+\[\left\lceil\frac{ x-120}{10} \right\rceil.\]
+Sollte ein Spieler gar keinen Stich machen, werden die Punkte verdoppelt.
+Sollte ein Team alle Punkte mitnehmen, so hat es einen Durchmarsch geschafft und bekommt 12 Punkte und entsprechend bekommt das gegnerische Team -12 Punkte.
+\subsection{Hochzeit}
+Ein Spieler mit zwei Kreuz Damen kann \glqq Hochzeit\grqq\;ansagen(optional kann noch eine Farbe oder erster Fremder angesagt werden). Der Partner ist derjenige, der den ersten Stich gewinnt, dessen erste Karte kein Trumpf ist (Fehlstich).(Entsprechend ist der Partner derjenige, der den ersten Stich gewinnt, dessen erste Karte vom angesagten Typ ist.) Wenn nach 3 Stichen kein Partner ermittelt wurde, oder der Spieler die Hochzeit nicht bekannt gibt (Stille Hochzeit), so spielt er einen Trumpf (Karo) Solo. 
+
+\section{Sonderregeln}
+\subsection{Charly} Macht der Kreuzbube den letzten Stich, so bekommt dieses Team einen Extrapunkt.
+\subsection{Athene} Fängt die Herzdame den Kreuzbuben im letzten Stich, so gibt dies einen Extrapunkt.(Eine Karte gilt als gefangen, wenn die zu fangende Karte vom gegnerischen Team kommt und die Karte die fängt, muss die höchste im Stich sein.)
+\subsection{Dulle gefangen}Fängt man die Dulle von gegnerischen Team bekommt man einen Extrapunkt. Sollten allerdings Dulle seines Partners \grqq fangen\glqq, dann gibt es einen Minuspunkt.
+\subsection{Klabautermann} Fängt man den Pikkönig mit der Pikdame, so erhält man einen Extrapunkt.
+\subsection{Chantall} Wird eine Karodame aufgespielt und bekommt den Stich, so bekommt diese Team einen Sonderpunkt.
+\subsection{Bergbauer} Nimmt ein Pikbube nur Karokarten mit, so bekommt man einen Extrapunkt.
+\subsection{????????}Fallen beide Herzbuben in einem Stich, so müssen diejenigen Spieler, die einen Herzbuben gelegt haben ihre Karten tauschen.
+\subsection{Herrensauna} Liegen vier Buben in einem Stich, so gibt dies für den Spieler mit dem höchsten Buben einen Sonderpunkt.
+\subsection{Backstreet-Boys} Liegen vier verschieden Buben in einem Stich so bekommt der Spieler mit dem Karobuben den Stich und zwei Extrapunkte.
+\subsection{\glqq 69\grqq-Regel} Fallen beide Karoneunen in einem Stich, so wird für den Rest des Spiels die Spielreihenfolge umgedreht.
+\subsection{Genschern} Besitzt ein Spieler beide Karokönige, so kann er beim ausspielen des ersten Karokönigs Genscher ansagen. Sein Teampartner ist nun derjenige Spieler, der den anderen Karokönig mitnimmt. Sollte der Spieler ihn selbst mit nehmen, so spielt er ein Trumpfsolo. Die Genscher-Partei ist immer die Re-Partei. Mann kann nicht bei einer Armut genschern.
+\subsection{Schweine} Besitz ein Spieler beide Füchse, so ist der erste ausgespielte Fuchs ein Schwein und die höchste Karte im Spiel.
+\section{Punktevergabe}
+Außer bei Hammelrennen und Ramsch, dazu siehe in die jeweiligen Abschnitte \ref{Hammelrennen} oder \ref{Ramsch}
+\begin{itemize}
+\item Zuerst muss nach dem Spielen aller Stiche festgestellt werden, welche Partei gewonnen hat. Die Alten gewinnen das Spiel mit 121 Punkten (die Kontrapartei gewinnt mit 120 Punkten).
+\item Es werden "Gute" und "Miese" Punkte aufgeschrieben, also Pluspunkte und Minuspunkte für jeden Spieler. Dies Verfahren ist analog zum Spielen mit Jetons oder barer Münze, wo direkt nach jedem Spiel ausgezahlt wird. Die Quersumme einer Zeile ist bei dieser Art des Aufschreibens immer Null. Der Grundwert wird der Nachvollziehbarkeit in einer eigenen Spalte notiert.
+\item Für die Siegende Partei, gibt es jeden angefangen 30-Punkte Schritt immer einen Punkt. Es gibt somit einen Punkt für das siegende Team und jeweils einen Punkt, wenn das gegnerische Team keine 90,...,keine 30, schwarz Punkte hat. Für jede erreichte Absage gibt es noch einen zusätzlichen Punkt.
+\item Wurde die zuletzt getätigte Absage nicht geschafft so hat dieses Team verloren, das Gegnerische Team bekommt somit den gewonnen Punkt. Jede Absage gibt nun einen Punkt für das gegnerische Team. Zusätzlich gibt es noch einen Punkt für jede Stufe der Absage die nicht erreicht wurde. Hat ein Team keine 30 angesagt, schafft aber nur 90, so bekommt das gegnerische drei Punkte für die Absagen und nochmal 2 Punkte weil die keine 60 und keine 30 nicht geschafft wurden. Sollte das ansagende sogar noch unter eine der Stufen keine 90,..., keine 30, schwarz fallen, so gibt dies auch jeweils nochmal einen Punkt. Würde im vorherigen Beispiel das nicht ansagende Team die Gegner keine 90 spielen, so bekommen nochmal einen Punkt für keine 90.
+\item Ansagen wie Re und/oder Kontra verdoppeln jeweils das bisherige Spielergebnis.
+\item Zuletzt werden noch die Sonderpunkte und, falls Kontra gewonnen hat, ein Punkt für gegen die Alten vergeben.
+\end{itemize}
+\subsection{Bock}
+\begin{itemize}
+\item Wenn Bock ausgelöst wird, wird die nächste Runde doppelt gewertet. Bock-Runden können sich auch überlappen. Bei Solo oder Hammelrennen verlängert sich die Bockrunde um jeweils ein Spiel
+\item Auslöser für Bock sind:
+\begin{itemize}
+\item Falsche An- oder Absage
+\item Ein Spiel endet 120 zu 120
+\item Ein Spiel gibt keine Punkte
+\end{itemize}
+\end{itemize}
+
+
+\end{document}
